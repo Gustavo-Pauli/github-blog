@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import styled, { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -26,37 +26,37 @@ export const GlobalStyle = createGlobalStyle`
   }
 `
 
-export const TitleLSpan = styled.h1`
+export const TitleLStyle = `
   font-size: 1.5rem;
   font-weight: bold;
   line-height: 130%;
 `
 
-export const TitleMSpan = styled.h2`
+export const TitleMStyle = `
   font-size: 1.25rem;
   font-weight: bold;
   line-height: 160%;
 `
 
-export const TitleSSpan = styled.h3`
+export const TitleSStyle = `
   font-size: 1.125rem;
   font-weight: bold;
   line-height: 160%;
 `
 
-export const TextMSpan = styled.p`
+export const TextMStyle = `
   font-size: 1rem;
   font-weight: normal;
   line-height: 160%;
 `
 
-export const TextSSpan = styled.span`
+export const TextSStyle = `
   font-size: 0.875rem;
   font-weight: normal;
   line-height: 160%;
 `
 
-export const LinkSpan = styled.span`
+export const LinkStyle = `
   font-size: 0.75rem;
   font-weight: bold;
   line-height: 160%;

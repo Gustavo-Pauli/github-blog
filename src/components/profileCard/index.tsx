@@ -1,5 +1,6 @@
 import {
   Description,
+  GithubLink,
   InfoElement,
   InfoIcon,
   InfoText,
@@ -7,11 +8,17 @@ import {
   ProfileImgWrapper,
   TextSide,
   Title,
+  TitleSection,
+  UpperText,
   Wrapper,
 } from './styles'
 import profileImgExample from '../../assets/avatar.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBuilding } from '@fortawesome/free-solid-svg-icons'
+import {
+  faBuilding,
+  faUserGroup,
+  faArrowUpRightFromSquare,
+} from '@fortawesome/free-solid-svg-icons'
 import { Github } from '../../assets/FontAwesome/github'
 
 export function ProfileCard() {
@@ -21,12 +28,20 @@ export function ProfileCard() {
         <img src={profileImgExample} alt="" />
       </ProfileImgWrapper>
       <TextSide>
-        <Title>Cameron Williamson</Title>
-        <Description>
-          Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu
-          viverra massa quam dignissim aenean malesuada suscipit. Nunc, volutpat
-          pulvinar vel mass.
-        </Description>
+        <UpperText>
+          <TitleSection>
+            <Title>Cameron Williamson</Title>
+            <GithubLink>
+              GITHUB
+              <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+            </GithubLink>
+          </TitleSection>
+          <Description>
+            Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu
+            viverra massa quam dignissim aenean malesuada suscipit. Nunc,
+            volutpat pulvinar vel mass.
+          </Description>
+        </UpperText>
         <InfoWrapper>
           <InfoElement>
             <InfoIcon>
@@ -44,7 +59,7 @@ export function ProfileCard() {
 
           <InfoElement>
             <InfoIcon>
-              <Github />
+              <FontAwesomeIcon icon={faUserGroup} />
             </InfoIcon>
             <InfoText>32 seguidores</InfoText>
           </InfoElement>
