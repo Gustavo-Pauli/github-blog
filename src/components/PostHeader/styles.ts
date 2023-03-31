@@ -46,5 +46,34 @@ export const Title = styled.div`
   margin-bottom: 8px;
 `
 
-// TODO add info
-export const InfoWrapper = styled.div``
+export const InfoWrapper = styled.div`
+  display: flex;
+  column-gap: 24px;
+`
+
+export const InfoElement = styled.div`
+  height: 26px;
+  color: white;
+
+  display: flex;
+  column-gap: 8px;
+  align-items: center;
+`
+
+export const InfoIcon = styled.div`
+  width: 18px;
+  height: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    fill: ${(props) => props.theme['base-label']};
+    color: ${(props) => props.theme['base-label']};
+  }
+`
+
+export const InfoText = styled.span`
+  color: ${(props) => props.theme['base-subtitle']};
+`

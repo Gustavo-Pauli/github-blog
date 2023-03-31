@@ -16,6 +16,8 @@ export interface Post {
   title: string
   content: string
   timestamp: Date
+  author: string
+  comments: number
 }
 
 interface GitUserContextType {
@@ -60,6 +62,8 @@ export function GitUserProvider({ children }: GitUserProviderProps) {
             title: post.title,
             content: post.body,
             timestamp: new Date(post.created_at),
+            author: post.user.login,
+            comments: post.comments,
           })),
         )
       })
