@@ -12,7 +12,7 @@ import {
   UpperText,
   Wrapper,
 } from './styles'
-import profileImgExample from '../../assets/avatar.jpg'
+// import profileImgExample from '../../assets/avatar.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faBuilding,
@@ -20,48 +20,53 @@ import {
   faArrowUpRightFromSquare,
 } from '@fortawesome/free-solid-svg-icons'
 import { Github } from '../../assets/FontAwesome/github'
+import { useContext } from 'react'
+import { GitUserContext } from '../../contexts/GitUserContainer'
 
 export function ProfileCard() {
+  const context = useContext(GitUserContext)
+
   return (
     <Wrapper>
       <ProfileImgWrapper>
-        <img src={profileImgExample} alt="" />
+        <img src={context.user?.avatar_url} height="148" width="148" alt="" />
       </ProfileImgWrapper>
       <TextSide>
         <UpperText>
-          <TitleSection>
-            <Title>Cameron Williamson</Title>
-            <GithubLink>
+          <TitleSection hasBio={!!context.user?.bio}>
+            <Title>{context.user?.name}</Title>
+            <GithubLink to={context.user?.html_url || ''}>
               GITHUB
               <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
             </GithubLink>
           </TitleSection>
-          <Description>
-            Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu
-            viverra massa quam dignissim aenean malesuada suscipit. Nunc,
-            volutpat pulvinar vel mass.
-          </Description>
+          <Description>{context.user?.bio}</Description>
         </UpperText>
         <InfoWrapper>
           <InfoElement>
             <InfoIcon>
               <Github />
             </InfoIcon>
-            <InfoText>cameronwll</InfoText>
+            <InfoText>{context.user?.login}</InfoText>
           </InfoElement>
 
-          <InfoElement>
-            <InfoIcon>
-              <FontAwesomeIcon icon={faBuilding} />
-            </InfoIcon>
-            <InfoText>Rocketseat</InfoText>
-          </InfoElement>
+          {context.user?.company && (
+            <InfoElement>
+              <InfoIcon>
+                <FontAwesomeIcon icon={faBuilding} />
+              </InfoIcon>
+              <InfoText>{context.user?.company}</InfoText>
+            </InfoElement>
+          )}
 
           <InfoElement>
             <InfoIcon>
               <FontAwesomeIcon icon={faUserGroup} />
             </InfoIcon>
-            <InfoText>32 seguidores</InfoText>
+            <InfoText>
+              {context.user?.followers}
+              {context.user?.followers === 1 ? ' seguidor' : ' seguidores'}
+            </InfoText>
           </InfoElement>
         </InfoWrapper>
       </TextSide>

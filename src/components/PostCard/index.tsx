@@ -1,7 +1,7 @@
 import { Content, Time, Title, TitleWrapper, Wrapper } from './styles'
 
 interface PostCardProps {
-  id: number
+  id: string
   title: string
   content: string
   timestamp: Date
@@ -9,9 +9,10 @@ interface PostCardProps {
 
 export function PostCard({ id, title, content, timestamp }: PostCardProps) {
   return (
-    <Wrapper>
+    <Wrapper to={'/post/' + id}>
       <TitleWrapper>
         <Title>{title}</Title>
+        {/* TODO: Implement time */}
         <Time>{'Há ' + timestamp.getDate() + ' dias'}</Time>
       </TitleWrapper>
       <Content>{content}</Content>

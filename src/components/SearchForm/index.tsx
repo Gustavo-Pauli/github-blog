@@ -1,3 +1,5 @@
+import { useContext } from 'react'
+import { GitUserContext } from '../../contexts/GitUserContainer'
 import {
   NumOfPublications,
   SearchInput,
@@ -7,11 +9,16 @@ import {
 } from './styles'
 
 export function SearchForm() {
+  const context = useContext(GitUserContext)
+
   return (
     <WrapperForm>
       <TitleWrapper>
         <Title>Publicações</Title>
-        <NumOfPublications>6 publicações</NumOfPublications>
+        <NumOfPublications>
+          {context.posts?.length}{' '}
+          {context.posts?.length === 1 ? 'publicação' : 'publicações'}
+        </NumOfPublications>
       </TitleWrapper>
       <SearchInput placeholder="Buscar conteúdo" />
     </WrapperForm>

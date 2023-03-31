@@ -1,18 +1,30 @@
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { TextMStyle, TextSStyle, TitleMStyle } from '../../styles/global'
 
-export const Wrapper = styled.div`
+export const Wrapper = styled(Link)`
   width: 416px;
   height: 251px;
 
   background: ${(props) => props.theme['base-post']};
   border-radius: 10px;
-  padding: 32px;
+  padding: 30px;
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   /* row-gap: 20px; */
+
+  text-decoration: none;
+
+  border: 2px solid transparent;
+  transition: border 0.125s ease;
+
+  :hover {
+    cursor: pointer;
+    /* box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25); */
+    border: 2px solid ${(props) => props.theme['base-label']};
+  }
 `
 
 export const TitleWrapper = styled.div`

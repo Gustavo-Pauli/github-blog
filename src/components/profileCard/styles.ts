@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { LinkStyle, TextMStyle, TitleLStyle } from '../../styles/global'
 // import { LinkSpan, TextMSpan, TitleLSpan } from '../../styles/global'
@@ -23,6 +24,9 @@ export const ProfileImgWrapper = styled.div`
   flex: 1 0 1;
 `
 
+/* justify-content: ${(props) =>
+    props.hasBio ? 'space-between' : 'flex-end'}; */
+
 export const TextSide = styled.div`
   flex: 1 1 0;
   display: flex;
@@ -35,28 +39,47 @@ export const TextSide = styled.div`
 export const UpperText = styled.div`
   display: flex;
   flex-direction: column;
+
+  height: 100%;
 `
 
-export const TitleSection = styled.div`
+interface hasBioProps {
+  hasBio: boolean
+}
+
+export const TitleSection = styled.div<hasBioProps>`
   margin-bottom: 8px;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  /* height: ${(props) => (props.hasBio ? 'initial' : '100%')}; */
 `
 
 export const Title = styled.h1`
   ${TitleLStyle}
 
+  margin-top: auto;
+
   color: ${(props) => props.theme['base-title']};
 `
 
-export const GithubLink = styled.span`
+export const GithubLink = styled(Link)`
   ${LinkStyle}
+
+  text-decoration: none;
+
+  margin-bottom: auto;
 
   display: flex;
   align-items: center;
   column-gap: 8px;
   color: ${(props) => props.theme.blue};
+
+  :hover {
+    text-decoration: underline;
+  }
 `
 
 export const Description = styled.span`
