@@ -19,11 +19,11 @@ import {
   faUserGroup,
   faArrowUpRightFromSquare,
 } from '@fortawesome/free-solid-svg-icons'
-import { Github } from '../../assets/FontAwesome/github'
 import { useContext } from 'react'
 import { GitUserContext } from '../../contexts/GitUserContainer'
+import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
-export function ProfileCard() {
+export function ProfileHeader() {
   const context = useContext(GitUserContext)
 
   return (
@@ -45,7 +45,7 @@ export function ProfileCard() {
         <InfoWrapper>
           <InfoElement>
             <InfoIcon>
-              <Github />
+              <FontAwesomeIcon icon={faGithub} />
             </InfoIcon>
             <InfoText>{context.user?.login}</InfoText>
           </InfoElement>

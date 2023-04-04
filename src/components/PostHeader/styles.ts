@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { LinkStyle, TitleLStyle } from '../../styles/global'
+import { LinkStyle, TextMStyle, TitleLStyle } from '../../styles/global'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export const Wrapper = styled.div`
   max-width: 864px;
@@ -18,26 +19,27 @@ export const NavLinksWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+
+  gap: 8px;
 `
 
-export const BackLink = styled(Link)`
+export const NavLink = styled(Link)`
   ${LinkStyle}
   text-decoration: none;
   color: ${(props) => props.theme.blue};
 
-  :hover {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  &:hover {
     text-decoration: underline;
   }
 `
 
-export const GithubLink = styled(Link)`
-  ${LinkStyle}
-  text-decoration: none;
-  color: ${(props) => props.theme.blue};
-
-  :hover {
-    text-decoration: underline;
-  }
+export const NavLinkIcon = styled(FontAwesomeIcon)`
+  height: 0.7rem;
+  width: 0.7rem;
 `
 
 export const Title = styled.div`
@@ -68,12 +70,11 @@ export const InfoIcon = styled.div`
   align-items: center;
   justify-content: center;
 
-  svg {
-    fill: ${(props) => props.theme['base-label']};
-    color: ${(props) => props.theme['base-label']};
-  }
+  fill: ${(props) => props.theme['base-label']};
+  color: ${(props) => props.theme['base-label']};
 `
 
 export const InfoText = styled.span`
-  color: ${(props) => props.theme['base-subtitle']};
+  ${TextMStyle}
+  color: ${(props) => props.theme['base-span']};
 `

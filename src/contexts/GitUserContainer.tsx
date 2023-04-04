@@ -18,6 +18,7 @@ export interface Post {
   timestamp: Date
   author: string
   comments: number
+  url: string
 }
 
 interface GitUserContextType {
@@ -33,8 +34,22 @@ export function GitUserProvider({ children }: GitUserProviderProps) {
   const [user, setUser] = useState<User | undefined>()
   const [posts, setPosts] = useState<Post[] | undefined>()
 
+  // async function authenticate() {
+  //   const response = await api.get('/octocat', {
+  //     headers: {
+  //       Authorization: `Bearer ${import.meta.env.GIT_TOKEN}`,
+  //     },
+  //   })
+
+  //   console.log(response)
+  // }
+
   async function fetchUser() {
-    const response = await api.get<User>('/users/gustavo-pauli')
+    const response = await api.get<User>('/users/gustavo-pauli', {
+      headers: {
+        Authorization: `Bearer ${import.meta.env.VITE_GIT_TOKEN}`,
+      },
+    })
 
     if (response.status === 200 && response.data) {
       setUser({
@@ -53,7 +68,11 @@ export function GitUserProvider({ children }: GitUserProviderProps) {
 
   async function fetchPosts() {
     api
-      .get<Post[]>('/repos/gustavo-pauli/github-blog/issues')
+      .get<Post[]>('/repos/gustavo-pauli/github-blog/issues', {
+        headers: {
+          Authorization: `Bearer ${import.meta.env.VITE_GIT_TOKEN}`,
+        },
+      })
       .then((response) => {
         console.log(response)
         setPosts(
@@ -64,6 +83,7 @@ export function GitUserProvider({ children }: GitUserProviderProps) {
             timestamp: new Date(post.created_at),
             author: post.user.login,
             comments: post.comments,
+            url: post.html_url,
           })),
         )
       })

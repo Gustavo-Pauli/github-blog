@@ -1,8 +1,7 @@
 import ptBR from 'date-fns/locale/pt-BR'
 import { Post } from '../../contexts/GitUserContainer'
 import {
-  BackLink,
-  GithubLink,
+  NavLink,
   InfoElement,
   InfoIcon,
   InfoText,
@@ -10,8 +9,17 @@ import {
   NavLinksWrapper,
   Title,
   Wrapper,
+  NavLinkIcon,
 } from './styles'
 import { formatDistanceToNow } from 'date-fns'
+import {
+  faArrowUpRightFromSquare,
+  faCalendarDay,
+  faChevronLeft,
+  faComment,
+} from '@fortawesome/free-solid-svg-icons'
+import { faGithub } from '@fortawesome/free-brands-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 interface PostHeaderProps {
   post: Post
@@ -26,22 +34,39 @@ export function PostHeader({ post }: PostHeaderProps) {
   return (
     <Wrapper>
       <NavLinksWrapper>
-        <BackLink to="/">VOLTAR</BackLink>
-        <GithubLink to="https://www.github.com">VER NO GITHUB</GithubLink>
+        <NavLink to="/">
+          <NavLinkIcon icon={faChevronLeft} />
+          VOLTAR
+        </NavLink>
+        <NavLink to={post.url}>
+          VER NO GITHUB
+          <NavLinkIcon icon={faArrowUpRightFromSquare} />
+        </NavLink>
       </NavLinksWrapper>
       <Title>{post.title}</Title>
       <InfoWrapper>
         <InfoElement>
-          <InfoIcon></InfoIcon>
+          <InfoIcon>
+            <FontAwesomeIcon icon={faGithub} />
+          </InfoIcon>
           <InfoText>{post.author}</InfoText>
         </InfoElement>
         <InfoElement>
-          <InfoIcon></InfoIcon>
-          <InfoText>{}</InfoText>
+          <InfoIcon>
+            <FontAwesomeIcon icon={faCalendarDay} />
+          </InfoIcon>
+          <InfoText>
+            {dateStr.charAt(0).toUpperCase() + dateStr.slice(1)}
+          </InfoText>
         </InfoElement>
         <InfoElement>
-          <InfoIcon></InfoIcon>
-          <InfoText>{post.comments}</InfoText>
+          <InfoIcon>
+            <FontAwesomeIcon icon={faComment} />
+          </InfoIcon>
+          <InfoText>
+            {post.comments}
+            {post.comments === 1 ? ' comentário' : ' comentários'}
+          </InfoText>
         </InfoElement>
       </InfoWrapper>
       {/* <Time>{'Há ' + 1 + ' dias'}</Time> */}

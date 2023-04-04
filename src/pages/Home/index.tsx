@@ -1,5 +1,5 @@
 import { PostCard } from '../../components/PostCard'
-import { ProfileCard } from '../../components/ProfileCard'
+import { ProfileHeader } from '../../components/ProfileHeader'
 import { SearchForm } from '../../components/SearchForm'
 import { PostsWrapper, ProfileWrapper, SearchWrapper, Wrapper } from './styles'
 import { GitUserContext, Post } from '../../contexts/GitUserContainer'
@@ -13,7 +13,7 @@ export function Home() {
   return (
     <Wrapper>
       <ProfileWrapper>
-        <ProfileCard />
+        <ProfileHeader />
       </ProfileWrapper>
       <SearchWrapper>
         <SearchForm />

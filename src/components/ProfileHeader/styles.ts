@@ -103,16 +103,19 @@ export const InfoElement = styled.div`
 `
 
 export const InfoIcon = styled.div`
-  width: 18px;
-  height: 18px;
-
   display: flex;
   align-items: center;
   justify-content: center;
 
+  width: 18px;
+  height: 18px;
+
   svg {
     fill: ${(props) => props.theme['base-label']};
     color: ${(props) => props.theme['base-label']};
+
+    width: 18px;
+    height: 18px;
   }
 `
 
