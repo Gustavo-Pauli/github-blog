@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
   align-items: center;
 
   margin-top: -88px;
+  margin-bottom: 72px;
 `
 
 export const ProfileWrapper = styled.div`
