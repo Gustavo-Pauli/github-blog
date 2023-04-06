@@ -49,11 +49,7 @@ export function GitUserProvider({ children }: GitUserProviderProps) {
   // }
 
   async function fetchUser() {
-    const response = await api.get<User>('/users/gustavo-pauli', {
-      headers: {
-        Authorization: `Bearer ${import.meta.env.VITE_GIT_TOKEN}`,
-      },
-    })
+    const response = await api.get<User>('/users/gustavo-pauli')
 
     if (response.status === 200 && response.data) {
       setUser({
@@ -72,11 +68,7 @@ export function GitUserProvider({ children }: GitUserProviderProps) {
 
   async function fetchPosts() {
     api
-      .get<Post[]>(`/repos/gustavo-pauli/${repoName}/issues`, {
-        headers: {
-          Authorization: `Bearer ${import.meta.env.VITE_GIT_TOKEN}`,
-        },
-      })
+      .get<Post[]>(`/repos/gustavo-pauli/${repoName}/issues`)
       .then((response) => {
         // console.log('fetching')
         setPosts(
