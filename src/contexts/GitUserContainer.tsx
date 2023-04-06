@@ -24,6 +24,9 @@ export interface Post {
 interface GitUserContextType {
   user?: User
   posts?: Post[]
+  repoName: string
+  fetchPosts: () => void
+  searchPosts: (search: string) => void
 }
 
 interface GitUserProviderProps extends PropsWithChildren {}
@@ -33,6 +36,7 @@ export const GitUserContext = createContext({} as GitUserContextType)
 export function GitUserProvider({ children }: GitUserProviderProps) {
   const [user, setUser] = useState<User | undefined>()
   const [posts, setPosts] = useState<Post[] | undefined>()
+  const repoName = 'github-blog'
 
   // async function authenticate() {
   //   const response = await api.get('/octocat', {
@@ -68,13 +72,13 @@ export function GitUserProvider({ children }: GitUserProviderProps) {
 
   async function fetchPosts() {
     api
-      .get<Post[]>('/repos/gustavo-pauli/github-blog/issues', {
+      .get<Post[]>(`/repos/gustavo-pauli/${repoName}/issues`, {
         headers: {
           Authorization: `Bearer ${import.meta.env.VITE_GIT_TOKEN}`,
         },
       })
       .then((response) => {
-        console.log(response)
+        // console.log('fetching')
         setPosts(
           response.data.map((post: any) => ({
             id: post.id,
@@ -97,14 +101,38 @@ export function GitUserProvider({ children }: GitUserProviderProps) {
     // }
   }
 
+  async function searchPosts(search: string) {
+    api
+      .get(`/search/issues`, {
+        params: {
+          q: `${search} is:issue repo:${user?.login}/${repoName}`,
+        },
+      })
+      .then((response) => {
+        // console.log('searching')
+        setPosts(
+          response.data.items.map((post: any) => ({
+            id: post.id,
+            title: post.title,
+            content: post.body,
+            timestamp: new Date(post.created_at),
+            author: post.user.login,
+            comments: post.comments,
+            url: post.html_url,
+          })),
+        )
+      })
+  }
+
   useEffect(() => {
     fetchUser()
     fetchPosts()
-    console.log('Done fetching')
   }, [])
 
   return (
-    <GitUserContext.Provider value={{ user, posts }}>
+    <GitUserContext.Provider
+      value={{ user, posts, repoName, fetchPosts, searchPosts }}
+    >
       {children}
     </GitUserContext.Provider>
   )
